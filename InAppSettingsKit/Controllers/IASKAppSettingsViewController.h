@@ -54,6 +54,7 @@
     
     BOOL                    _showCreditsFooter;
     BOOL                    _showDoneButton;
+    BOOL                    _hideBottomBarOnPushedViewControllers;
 }
 
 @property (nonatomic, assign) IBOutlet id delegate;
@@ -62,6 +63,7 @@
 @property (nonatomic, copy) NSString *file;
 @property (nonatomic, assign) BOOL showCreditsFooter;
 @property (nonatomic, assign) BOOL showDoneButton;
+@property (nonatomic, assign) BOOL hideBottomBarOnPushedViewControllers;
 
 - (void)synchronizeSettings;
 - (IBAction)dismiss:(id)sender;

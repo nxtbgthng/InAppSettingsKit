@@ -62,6 +62,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 @synthesize showCreditsFooter = _showCreditsFooter;
 @synthesize showDoneButton = _showDoneButton;
 @synthesize settingsStore = _settingsStore;
+@synthesize hideBottomBarOnPushedViewControllers = _hideBottomBarOnPushedViewControllers;
 
 #pragma mark accessors
 - (IASKSettingsReader*)settingsReader {
@@ -583,6 +584,7 @@ CGRect IASKCGRectSwap(CGRect rect);
         [targetViewController setCurrentSpecifier:specifier];
         targetViewController.settingsReader = self.settingsReader;
         targetViewController.settingsStore = self.settingsStore;
+        targetViewController.hidesBottomBarWhenPushed = self.hideBottomBarOnPushedViewControllers;
         [[self navigationController] pushViewController:targetViewController animated:YES];
     }
     else if ([[specifier type] isEqualToString:kIASKPSSliderSpecifier]) {
@@ -610,6 +612,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 				[vc performSelector:@selector(setSettingsStore:) withObject:self.settingsStore];
 			}
 			self.navigationController.delegate = nil;
+            vc.hidesBottomBarWhenPushed = self.hideBottomBarOnPushedViewControllers;
             [self.navigationController pushViewController:vc animated:YES];
             [vc performSelector:@selector(release)];
             return;
@@ -645,6 +648,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 		targetViewController.file = specifier.file;
 		targetViewController.title = specifier.title;
         targetViewController.showCreditsFooter = NO;
+        targetViewController.hidesBottomBarWhenPushed = self.hideBottomBarOnPushedViewControllers;
         [[self navigationController] pushViewController:targetViewController animated:YES];
     } else if ([[specifier type] isEqualToString:kIASKOpenURLSpecifier]) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
